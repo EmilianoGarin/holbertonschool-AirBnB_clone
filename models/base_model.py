@@ -33,8 +33,8 @@ class BaseModel():
 
     def save(self):
         """saves the moment it was modified"""
-        models.storage.save()
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """description of a simple object type"""
