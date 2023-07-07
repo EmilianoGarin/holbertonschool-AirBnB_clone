@@ -27,7 +27,6 @@ class BaseModel():
             self.updated_at = datetime.now()
         models.storage.new(self)
 
-
     def __str__(self) -> str:
         """string with a description of a simple object type"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"

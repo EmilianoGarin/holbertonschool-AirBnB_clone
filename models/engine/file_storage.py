@@ -41,5 +41,5 @@ class FileStorage():
         finally:
             for k, v in ret.items():
                 cls = ret[k]['__class__']
-                if  'BaseModel' == cls:
+                if 'BaseModel' == cls:
                     FileStorage.__objects[k] = BaseModel(**v)
