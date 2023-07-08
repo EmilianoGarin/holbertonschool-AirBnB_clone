@@ -2,6 +2,7 @@
 """ console aribnb """
 import cmd
 from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -28,6 +29,7 @@ class HBNBCommand(cmd.Cmd):
         if arg == "BaseModel":
             instance = BaseModel()
             print(f"{instance.id}")
+            instance.save()
         else:
             print("** class doesn't exist **")
 
@@ -40,21 +42,67 @@ class HBNBCommand(cmd.Cmd):
             if len(args) == 1:
                 print("** instance id missing **")
             else:
-                pass
+                key = args[0] + '.' + args[1]
+                objects = storage.all()
+                if key in objects:
+                    print(f"{objects[key]}")
+                else:
+                    print("** no instance found **")
         else:
             print("** class doesn't exist **")
 
     def do_destroy(self, arg):
         """ deletes an instance based on the class and id """
-        pass
+        if not arg:
+            print("** class name missing **")
+        args = arg.split()
+        if args[0] == "BaseModel":
+            if len(args) == 1:
+                print("** instance id missing **")
+            else:
+                key = args[0] + '.' + args[1]
+                objects = storage.all()
+                if key in objects:
+                    del objects[key]
+                    storage.save()
+        else:
+            print("** class doesn't exist **")
 
     def do_all(self, arg):
         """ prints all string represntation of all instances """
-        pass
+        if not arg:
+            objVal = []
+            for obj in storage.all().values():
+                objVal.append(obj)
+            print(objVal)
+        elif arg[0] != "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            objVal = []
+            for obj in storage.all().values():
+                if obj.__class__.__name__ == arg[0]:
+                    objVal.append(obj)
+            print(objVal)
 
     def do_update(self, arg):
         """ updates an instance based on class and id """
-        pass
+        if not arg:
+            print("** class name missing **")
+        args = arg.split()
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
+        lenn = len(args)
+        if lenn == 1:
+            print("** instance id missing **")
+        elif lenn == 2:
+            print("** attribute name missing **")
+        elif lenn == 3:
+            print("** value missing **")
+        key = args[0] + '.' + args[1]
+        if key in storage.all():
+            setattr(key, args[2], args[3])
+        else:
+            print("** no instance found **")
 
 
 if __name__ == '__main__':
