@@ -112,17 +112,18 @@ class HBNBCommand(cmd.Cmd):
                 print("** attribute name missing **")
             elif lenn < 4:
                 print("** value missing **")
-            key = args[0] + '.' + args[1]
-            if key in storage.all():
-                args[3] = args[3].strip('"')
-                try:
-                    args[3] = int(args[3])
-                except Exception:
-                    pass
-                setattr(storage.all()[key], args[2], args[3])
-                storage.all()[key].save()
             else:
-                print("** no instance found **")
+                key = args[0] + '.' + args[1]
+                if key in storage.all():
+                    args[3] = args[3].strip('"')
+                    try:
+                        args[3] = int(args[3])
+                    except Exception:
+                        pass
+                    setattr(storage.all()[key], args[2], args[3])
+                    storage.all()[key].save()
+                else:
+                    print("** no instance found **")
 
 
 if __name__ == '__main__':
