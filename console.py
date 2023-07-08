@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         """ creates a new instance """
         if not arg:
             print("** class name missing **")
-        if arg == "BaseModel":
+        elif arg == "BaseModel":
             instance = BaseModel()
             print(f"{instance.id}")
             instance.save()
@@ -37,19 +37,20 @@ class HBNBCommand(cmd.Cmd):
         """ prints the string representation of an instance """
         if not arg:
             print("** class name missing **")
-        args = arg.split()
-        if args[0] == "BaseModel":
-            if len(args) == 1:
-                print("** instance id missing **")
-            else:
-                key = args[0] + '.' + args[1]
-                objects = storage.all()
-                if key in objects:
-                    print(f"{objects[key]}")
-                else:
-                    print("** no instance found **")
         else:
-            print("** class doesn't exist **")
+            args = arg.split()
+            if args[0] == "BaseModel":
+                if len(args) == 1:
+                    print("** instance id missing **")
+                else:
+                    key = args[0] + '.' + args[1]
+                    objects = storage.all()
+                    if key in objects:
+                        print(f"{objects[key]}")
+                    else:
+                        print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
 
     def do_destroy(self, arg):
         """ deletes an instance based on the class and id """
