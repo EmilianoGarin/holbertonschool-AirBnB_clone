@@ -8,6 +8,12 @@ import pycodestyle
 import models
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class TestFileStorage(unittest.TestCase):
@@ -101,6 +107,20 @@ class TestFileStorage(unittest.TestCase):
             check if reload working
         """
         self.assertIsNotNone(FileStorage().reload)
+
+    def test_all_subclass(self):
+        """
+            test all subclass of BaseModel
+        """        
+        cls = {'BaseModel.': BaseModel, 'User.': User, 'State.': State,
+               'City.': City, 'Amenity.': Amenity, 'Place.': Place,
+               'Review.': Review}
+        dic = {}
+        stor_all = self.storage.all()
+        for k, v in cls.items():
+            dic[k] = v()
+        for k, v in dic.items():
+            self.assertIsNotNone(stor_all[k + v.id])
 
     if __name__ == '__main__':
         unittest.main()

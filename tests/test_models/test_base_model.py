@@ -65,16 +65,16 @@ class TestBaseModel(unittest.TestCase):
         """
             test to_dict method
         """
-        dict = self.model1.to_dict()
-        self.assertNotEqual(dict, self.model1.__dict__)
-        self.assertEqual(dict['id'], self.model1.__dict__['id'])
-        self.assertNotEqual(dict['created_at'],
+        dic = self.model1.to_dict()
+        self.assertNotEqual(dic, self.model1.__dict__)
+        self.assertEqual(dic['id'], self.model1.__dict__['id'])
+        self.assertNotEqual(dic['created_at'],
                             self.model1.__dict__['created_at'])
-        self.assertNotEqual(type(dict['created_at']),
+        self.assertNotEqual(type(dic['created_at']),
                             type(self.model1.__dict__['created_at']))
-        self.assertNotEqual(dict['updated_at'],
+        self.assertNotEqual(dic['updated_at'],
                             self.model1.__dict__['updated_at'])
-        self.assertNotEqual(type(dict['updated_at']),
+        self.assertNotEqual(type(dic['updated_at']),
                             type(self.model1.__dict__['updated_at']))
 
     if __name__ == '__main__':
