@@ -95,6 +95,12 @@ class TestFileStorage(unittest.TestCase):
         syntaxis = pycodestyle.StyleGuide(quit=True)
         test = syntaxis.check_files(['models/engine/file_storage.py'])
         self.assertEqual(test.total_errors, 0, "Found style errors")
+    
+    def test_reload_method(self):
+        """
+            check if reload working
+        """
+        self.assertIsNotNone(FileStorage().reload)
 
     if __name__ == '__main__':
         unittest.main()
