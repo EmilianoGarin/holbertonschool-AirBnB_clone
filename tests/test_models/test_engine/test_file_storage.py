@@ -15,11 +15,17 @@ class TestFileStorage(unittest.TestCase):
         Test the class FileStorage
     """
     def setUp(self):
+        """
+            objects to test
+        """
         self.storage = FileStorage()
         self.model1 = BaseModel()
         self.model2 = BaseModel()
 
     def tearDown(self):
+        """
+            delete the file.json when finish the test
+        """
         try:
             os.remove('file.json')
         except FileNotFoundError:
@@ -30,7 +36,7 @@ class TestFileStorage(unittest.TestCase):
             test if storage in init is on
         """
         self.assertIsNotNone(models.storage.all())
-        self.assertIsNotNone(models.storage.all())
+        self.assertIsNone(models.storage.reload())
 
     def test_attributes(self):
         """
