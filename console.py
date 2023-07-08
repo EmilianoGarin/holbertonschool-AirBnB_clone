@@ -105,7 +105,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             key = args[0] + '.' + args[1]
             if key in storage.all():
-                setattr(storage.all()[key], args[2], args[3].strip('"'))
+                args[3] = args[3].strip('"')
+                try:
+                    args[3] = int(args[3])
+                except Exception:
+                    pass
+                setattr(storage.all()[key], args[2], args[3])
                 storage.save()
             else:
                 print("** no instance found **")
