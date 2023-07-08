@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
                 except Exception:
                     pass
                 setattr(storage.all()[key], args[2], args[3])
-                storage.save()
+                storage.all()[key].save()
             else:
                 print("** no instance found **")
 
