@@ -4,6 +4,7 @@
 """
 import unittest
 import os
+import pycodestyle
 import models
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
@@ -56,6 +57,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.new(self.model1)
         self.storage.new(self.model2)
         all_objs = self.storage.all()
+        self.assertIsNotNone(all_objs)
         self.assertIn("BaseModel." + self.model1.id, all_objs)
         self.assertIn("BaseModel." + self.model2.id, all_objs)
         self.assertIs(all_objs, self.storage._FileStorage__objects)
@@ -86,6 +88,14 @@ class TestFileStorage(unittest.TestCase):
         self.assertFalse(self.model1 is obj_storage)
         self.assertIsInstance(obj_storage, BaseModel)
         self.assertEqual(self.model1.id, obj_storage.id)
+
+    def test_pep8(self):
+        """
+            Check PEP8 style
+        """
+        syntaxis = pycodestyle.StyleGuide(quit=True)
+        test = syntaxis.check_files(['models/engine/file_storage.py'])
+        self.assertEqual(test.total_errors, 0, "Found style errors")
 
     if __name__ == '__main__':
         unittest.main()
