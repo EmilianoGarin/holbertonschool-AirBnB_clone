@@ -10,13 +10,14 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """ console airbnb """
     prompt = '(hbnb) '
     file = None
     cls = ['BaseModel', 'User', 'State',
-               'City', 'Amenity', 'Place',
-               'Review']
+           'City', 'Amenity', 'Place',
+           'Review']
 
     def emptyline(self):
         """ empty line """
