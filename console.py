@@ -67,6 +67,8 @@ class HBNBCommand(cmd.Cmd):
                     if key in objects:
                         del objects[key]
                         storage.save()
+                    else:
+                        print("** no instance found **")
             else:
                 print("** class doesn't exist **")
 
@@ -104,6 +106,7 @@ class HBNBCommand(cmd.Cmd):
             key = args[0] + '.' + args[1]
             if key in storage.all():
                 setattr(storage.all()[key], args[2], args[3].strip('"'))
+                storage.save()
             else:
                 print("** no instance found **")
 
