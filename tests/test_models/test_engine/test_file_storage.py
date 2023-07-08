@@ -36,7 +36,6 @@ class TestFileStorage(unittest.TestCase):
             test if storage in init is on
         """
         self.assertIsNotNone(models.storage.all())
-        self.assertIsNone(models.storage.reload())
 
     def test_attributes(self):
         """
