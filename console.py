@@ -3,12 +3,20 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
-
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ console airbnb """
     prompt = '(hbnb) '
     file = None
+    cls = ['BaseModel', 'User', 'State',
+               'City', 'Amenity', 'Place',
+               'Review']
 
     def emptyline(self):
         """ empty line """
@@ -26,8 +34,8 @@ class HBNBCommand(cmd.Cmd):
         """ creates a new instance """
         if not arg:
             print("** class name missing **")
-        elif arg == "BaseModel":
-            instance = BaseModel()
+        elif arg in self.cls:
+            instance = eval(arg)
             print(f"{instance.id}")
             instance.save()
         else:
@@ -39,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] == "BaseModel":
+            if args[0] in self.cls:
                 if len(args) == 1:
                     print("** instance id missing **")
                 else:
@@ -58,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] == "BaseModel":
+            if args[0] in self.cls:
                 if len(args) == 1:
                     print("** instance id missing **")
                 else:
@@ -79,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             for obj in storage.all().values():
                 objVal.append(str(obj))
             print(objVal)
-        elif arg != "BaseModel":
+        elif arg not in self.cls:
             print("** class doesn't exist **")
         else:
             objVal = []
@@ -94,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] != "BaseModel":
+            if args[0] not in self.cls:
                 print("** class doesn't exist **")
             lenn = len(args)
             if lenn == 1:
