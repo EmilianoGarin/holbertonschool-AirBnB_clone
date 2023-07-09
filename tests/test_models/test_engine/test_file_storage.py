@@ -101,7 +101,7 @@ class TestFileStorage(unittest.TestCase):
         syntaxis = pycodestyle.StyleGuide(quit=True)
         test = syntaxis.check_files(['models/engine/file_storage.py'])
         self.assertEqual(test.total_errors, 0, "Found style errors")
-    
+
     def test_reload_method(self):
         """
             check if reload working
@@ -111,7 +111,7 @@ class TestFileStorage(unittest.TestCase):
     def test_all_subclass(self):
         """
             test all subclass of BaseModel
-        """        
+        """
         cls = {'BaseModel.': BaseModel, 'User.': User, 'State.': State,
                'City.': City, 'Amenity.': Amenity, 'Place.': Place,
                'Review.': Review}
