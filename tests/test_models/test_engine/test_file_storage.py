@@ -41,7 +41,7 @@ class TestFileStorage(unittest.TestCase):
         """
             test objects
         """
-        self.assertIsInstance(self.storage.__objects, dict)
+        self.assertIsInstance(self.storage._FileStorage__objects, dict)
 
     def test_models_storage(self):
         """
