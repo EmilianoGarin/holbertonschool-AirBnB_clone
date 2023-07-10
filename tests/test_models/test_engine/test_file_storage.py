@@ -37,6 +37,12 @@ class TestFileStorage(unittest.TestCase):
         except FileNotFoundError:
             pass
 
+    def test_objects(self):
+        """
+            test objects
+        """
+        self.assertIsInstance(self.storage.__objects, dict)
+
     def test_models_storage(self):
         """
             test if storage in init is on
